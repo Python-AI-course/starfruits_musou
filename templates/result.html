@@ -1,1 +1,28 @@
-print("Hello World")
+{% extends "layout.html" %}
+{% block content %}
+<div style="padding:1em;">
+    <div class="page-header">
+    <h2>オードリー春日かスギちゃんのどちらかに分類してみる</h2>
+    </div>
+    <div class="enter_btn">
+        <small>写真をアップロードしてください</small>
+        <form action = "/upload" method="post" enctype="multipart/form-data">
+            <p><input type="file" id = "upload_files" name = "upload_files" multiple="multiple" class="form-control"></p>
+            <p><input type="submit" value="送信" class="form-control btn btn-primary"></p>
+        </form>
+    </div>
+
+    {% if user_images %}
+    {% for path in user_images %}
+        <div style="margin: 10px 0px;">
+            <p class="message">判定画像</p>
+            <img src="images/{{ path }}" style="vertical-align: bottom; width: 200px;"><br>
+            {{ path }}
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    <p class="message">判定結果</p>
+    <p style="text-align: center;">この顔は、、、、、、</p>
+</div>
+{% endblock %}
